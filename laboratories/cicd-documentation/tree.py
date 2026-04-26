@@ -75,11 +75,34 @@ class Tree:
             self._printInorderTree(node.right)
 
     def _printPreorderTree(self, node):
-        # TODO
-        pass
+        if node is not None:
+            print(str(node.data) + ' ')
+            self._printPreorderTree(node.left)
+            self._printPreorderTree(node.right)
 
     def _printPostorderTree(self, node):
-        # TODO
-        pass
+        if node is not None:
+            self._printPostorderTree(node.left)
+            self._printPostorderTree(node.right)
+            print(str(node.data) + ' ')
 
 
+def test_find_existing_node():
+    tree = Tree()
+    for value in [10, 5, 15, 3, 7]:
+        tree.add(value)
+
+    node = tree._find(7, tree.root)
+
+    assert node is not None
+    assert node.data == 7
+
+
+def test_find_missing_node_returns_none():
+    tree = Tree()
+    for value in [10, 5, 15, 3, 7]:
+        tree.add(value)
+
+    node = tree._find(99, tree.root)
+
+    assert node is None
